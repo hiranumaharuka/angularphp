@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Products } from '../models/products';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { Products } from '../interfaces/products';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CrudService {
   public url = environment.web_api_url_base;
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+  };
   constructor(private http: HttpClient) {}
+
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: リモート上のロギング基盤にエラーを送信する
+      console.error(error);
+      // 空の結果を返して、アプリを持続可能にする
+      return of(result as T);
+    };
+  }
   getProducts(): Observable<Products[]> {
     return this.http
       .get<Products[]>(this.url + 'view.php')
@@ -23,16 +35,19 @@ export class CrudService {
       .pipe(map((product) => product));
   }
 
-  createProduct(data) {
+  createProduct(product) {
     return this.http
-      .post(this.url + 'create.php', data)
-      .pipe(map((response) => response));
+      .post(this.url + 'create.php', product, this.httpOptions)
+      .pipe(map((response) => response)
+      // catchError(this.handleError<any>('createProduct'))
+      );
   }
 
-  updateProduct(data) {
-    return this.http
-      .post(this.url + 'update.php', data)
-      .pipe(map((response) => response));
+  updateProduct(product: Products) {
+    return this.http.post(this.url + 'update.php', product).pipe(
+      map((response) => response),
+      catchError(this.handleError<any>('updateProduct'))
+    );
   }
 
   deleteProduct(id) {
