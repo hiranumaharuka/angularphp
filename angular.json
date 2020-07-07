@@ -147,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "ng9CRUD"
+  "defaultProject": "ng9CRUD",
+  "cli": {
+    "analytics": false
+  }
 }
