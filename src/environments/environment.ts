@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  web_api_url_base: 'http://localhost:8080/web_api/'
+  // web_api_url_base: 'http://localhost:8080/web_api/'
 };
 
 /*
