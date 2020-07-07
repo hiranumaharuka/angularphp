@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-app.use(express.static(__dirname + '/dist/ng9crud'));
+app.use(express.static(__dirname + '/dist/ng9CRUD'));
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/dist/ng9crud/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/ng9CRUD/index.html'));
 });
 var distDir = __dirname + '/dist/';
 app.use(express.static(distDir));
