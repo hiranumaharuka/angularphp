@@ -9,7 +9,8 @@ import { Products } from '../interfaces/products';
   providedIn: 'root',
 })
 export class CrudService {
-  public url = environment.web_api_url_base;
+  // public url = environment.web_api_url_base;
+  public url;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
   };
