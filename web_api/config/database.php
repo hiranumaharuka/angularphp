@@ -1,16 +1,11 @@
 <?php
 // used to connect to the database
-$host = "localhost";
-$db_name = "ng7_crud";
-$username = "root";
-$password = "";
-  
-try {
-    $con = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
-}
-  
-// show error
-catch(PDOException $exception){
-    echo "Connection error: " . $exception->getMessage();
-}
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$conn = new mysqli($server, $username, $password, $db);
 ?>
