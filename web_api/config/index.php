@@ -1,26 +1,23 @@
 <?php
-// db credentials
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$server = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$db = substr($url["path"], 1);
+$db = parse_url($_SERVER['CLEARDB_DATABASE_URL']);
+$db['dbname'] = ltrim($db['path'], '/');
+$dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8";
 
-// print_r($url);
+try {
+    $db = new PDO($dsn, $db['user'], $db['pass']);
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Connect with the database.
-function connect()
-{
-  $connect = new mysqli($server, $username, $password, $db);
-
-  if (mysqli_connect_errno($connect)) {
-    die("Failed to connect:" . mysqli_connect_error());
-  }
-
-  mysqli_set_charset($connect, "utf8mb4");
-
-  return $connect;
+} catch (PDOException $e) {
+    echo 'Error: ' . h($e->getMessage());
 }
 
-$con = connect();
+function h($var)
+{
+    if (is_array($var)) {
+        return array_map('h', $var);
+    } else {
+        return htmlspecialchars($var, ENT_QUOTES, 'UTF-8');
+    }
+}
