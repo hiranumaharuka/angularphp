@@ -12,7 +12,7 @@ $db = substr($url["path"], 1);
 // Connect with the database.
 function connect()
 {
-  $connect = mysqli_connect($server, $username, $password, $db);
+  $connect = new mysqli($server, $username, $password, $db);
 
   if (mysqli_connect_errno($connect)) {
     die("Failed to connect:" . mysqli_connect_error());
