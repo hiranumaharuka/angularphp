@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 
-web_api/vendor/
+vendor/
