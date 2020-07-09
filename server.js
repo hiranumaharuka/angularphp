@@ -12,4 +12,4 @@ app.use(express.static(distDir));
 // );
 // });
 app.listen(process.env.PORT || 8080);
-console.log('Server listening on port 8080');
+console.log(process.env.PORT);

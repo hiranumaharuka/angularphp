@@ -2,7 +2,7 @@
 
 $db = parse_url($_SERVER['CLEARDB_DATABASE_URL']);
 $db['dbname'] = ltrim($db['path'], '/');
-$dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8";
+$dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8mb4";
 
 try {
     $db = new PDO($dsn, $db['user'], $db['pass']);
