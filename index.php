@@ -1,2 +1,2 @@
-<? php
-echo('aaa');
+<?php
+  echo "こんにちは世界！";
