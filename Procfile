@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-nginx config/databse.php & node server.js & wait -n
+web: vendor/bin/heroku-php-nginx config/ & node server.js & wait -n
