@@ -1,33 +1,26 @@
 <?php
+// db credentials
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-$db = parse_url($_SERVER['CLEARDB_DATABASE_URL']);
-$db['dbname'] = ltrim($db['path'], '/');
-$dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8";
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
 
-try {
-    $db = new PDO($dsn, $db['user'], $db['pass']);
-    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+print_r($url);
 
-    $sql = 'SELECT * FROM posts';
-    $prepare = $db->prepare($sql);
-    $prepare->execute();
-
-    echo '<pre>';
-    $prepare->execute();
-    $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
-    print_r(h($result));
-    echo "\n";
-    echo '</pre>';
-} catch (PDOException $e) {
-    echo 'Error: ' . h($e->getMessage());
-}
-
-function h($var)
+// Connect with the database.
+function connect()
 {
-    if (is_array($var)) {
-        return array_map('h', $var);
-    } else {
-        return htmlspecialchars($var, ENT_QUOTES, 'UTF-8');
-    }
+  $connect = mysqli_connect($server, $username, $password, $db);
+
+  if (mysqli_connect_errno($connect)) {
+    die("Failed to connect:" . mysqli_connect_error());
+  }
+
+  mysqli_set_charset($connect, "utf8mb4");
+
+  return $connect;
 }
+
+$con = connect();
