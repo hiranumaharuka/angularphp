@@ -8,7 +8,7 @@ include 'config/index.php';
 // delete message prompt will be here
 
 // select all data
-$query = "SELECT p_id, p_name, p_description, p_price FROM products ORDER BY p_id DESC";
+$query = "SELECT * FROM posts ORDER BY postId DESC";
 $stmt = $con->prepare($query);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
