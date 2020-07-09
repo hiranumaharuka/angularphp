@@ -12,6 +12,13 @@ try {
     $sql = 'SELECT * FROM posts';
     $prepare = $db->prepare($sql);
     $prepare->execute();
+
+    echo '<pre>';
+    $prepare->execute();
+    $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+    print_r(h($result));
+    echo "\n";
+    echo '</pre>';
 } catch (PDOException $e) {
     echo 'Error: ' . h($e->getMessage());
 }
