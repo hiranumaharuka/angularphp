@@ -7,7 +7,7 @@ $username = $url["user"];
 $password = $url["pass"];
 $db = substr($url["path"], 1);
 
-print_r($url);
+// print_r($url);
 
 // Connect with the database.
 function connect()
