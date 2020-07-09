@@ -4,3 +4,7 @@ export interface Products {
   p_description: number;
   p_price: any;
 }
+
+export interface Post {
+  productId: number;
+}
