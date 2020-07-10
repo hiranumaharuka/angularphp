@@ -4,15 +4,14 @@ header("Access-Control-Allow-Methods: PUT, GET, POST");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 include 'index.php';
 $postdata = file_get_contents("php://input");
-if(isset($postdata) && !empty($postdata))
-{
-  $request = json_decode($postdata);
-  // print_r($request->data);
-// include database connection
+if (isset($postdata) && !empty($postdata)) {
+    $request = json_decode($postdata);
+    // print_r($request->data);
+    // include database connection
     try {
 
 // insert query
-        $query = "INSERT INTO posts SET title=:title, content:content, category=:category, authorId:authorId";
+        $query = "INSERT INTO posts SET title=:title, content=:content, category=:category, authorId=:authorId";
         // prepare query for execution
         $stmt = $db->prepare($query);
         // posted values
