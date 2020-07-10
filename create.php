@@ -5,22 +5,24 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 if($_POST){
 
 // include database connection
-include 'config/database.php';
+include 'index.php';
 
 try{
 
 // insert query
-$query = "INSERT INTO products SET p_name=:name, p_description=:description, p_price=:price";
+$query = "INSERT INTO posts SET title=:title, content:content, category=:category, authorId:authorId";
 // prepare query for execution
 $stmt = $con->prepare($query);
 // posted values
-$name = $_POST['name'];
-$description = $_POST['description'];
-$price = $_POST['price'];
+$title = $_POST['title'];
+$content = $_POST['content'];
+$category = $_POST['category'];
+$authorId = $_POST['authorId'];
 // bind the parameters
-$stmt->bindParam(':name', $name);
-$stmt->bindParam(':description', $description);
-$stmt->bindParam(':price', $price);
+$stmt->bindParam(':title', $title);
+$stmt->bindParam(':content', $content);
+$stmt->bindParam(':category', $category);
+$stmt->bindParam(':authorId', $authorId);
 // Execute the query
 if($stmt->execute()){
     echo json_encode(array('result'=>'success'));

@@ -13,7 +13,6 @@ $stmt = $db->prepare($query);
 $posts = [];
 if($stmt->execute())
 {
-  $cr = 0;
  while($row = $stmt->fetch(PDO::FETCH_ASSOC))
  {
   $posts[] = $row;
@@ -21,9 +20,5 @@ if($stmt->execute())
 
  echo json_encode($posts);
 }
-// $stmt->execute();
-// $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-// $json = json_encode($results);
-// echo $json;
-?>
 
+?>
