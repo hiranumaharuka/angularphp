@@ -7,7 +7,7 @@ $postdata = file_get_contents("php://input");
 if(isset($postdata) && !empty($postdata))
 {
   $request = json_decode($postdata);
-  print_r($request);
+  print_r($request->data);
 // include database connection
     try {
 
@@ -16,9 +16,9 @@ if(isset($postdata) && !empty($postdata))
         // prepare query for execution
         $stmt = $db->prepare($query);
         // posted values
-        $title = $request['title'];
-        $content = $request['content'];
-        $category = $request['category'];
+        $title = trim($request->data->title);
+        $content = trim($request->data->content);
+        $category = trim($request->data->category);
         $authorId = $request['authorId'];
         // bind the parameters
         $stmt->bindParam(':title', $title);
