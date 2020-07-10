@@ -10,18 +10,13 @@ error_reporting(E_ERROR);
 // select all data
 $query = "SELECT * FROM posts";
 $stmt = $db->prepare($query);
-$posts = ['あいう','かきく'];
+$posts = [];
 if($stmt->execute())
 {
   $cr = 0;
  while($row = $stmt->fetch(PDO::FETCH_ASSOC))
  {
-  $users[$cr]['postId']    = $row['postId'];
-  $users[$cr]['title'] = $row['title'];
-  $users[$cr]['content'] = $row['content'];
-  $users[$cr]['category'] = $row['category'];
-  $users[$cr]['authorId'] = $row['authorId'];
-  $cr++;
+  $posts[] = $row;
  }
 
  echo json_encode($posts);
