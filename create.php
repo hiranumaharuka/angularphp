@@ -2,11 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-if ($_POST) {
-
+include 'index.php';
+$postdata = file_get_contents("php://input");
+if(isset($postdata) && !empty($postdata))
+{
+  $request = json_decode($postdata);
+// if ($_POST) {
 // include database connection
-    include 'index.php';
-
     try {
 
 // insert query
@@ -14,10 +16,10 @@ if ($_POST) {
         // prepare query for execution
         $stmt = $db->prepare($query);
         // posted values
-        $title = $_POST['title'];
-        $content = $_POST['content'];
-        $category = $_POST['category'];
-        $authorId = $_POST['authorId'];
+        $title = $request['title'];
+        $content = $request['content'];
+        $category = $request['category'];
+        $authorId = $request['authorId'];
         // bind the parameters
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
