@@ -10,7 +10,7 @@ error_reporting(E_ERROR);
 // select all data
 $query = "SELECT * FROM posts";
 $stmt = $db->prepare($query);
-$posts = [];
+$posts = ['あいう','かきく'];
 if($stmt->execute())
 {
   $cr = 0;
