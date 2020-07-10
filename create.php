@@ -7,7 +7,7 @@ $postdata = file_get_contents("php://input");
 if(isset($postdata) && !empty($postdata))
 {
   $request = json_decode($postdata);
-  print_r($request->data);
+  // print_r($request->data);
 // include database connection
     try {
 
