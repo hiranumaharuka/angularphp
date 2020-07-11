@@ -18,6 +18,10 @@ if (isset($postdata) && !empty($postdata)) {
         $content = trim($request->data->content);
         $category = trim($request->data->category);
         $authorId = $request['authorId'];
+
+
+        print_r($title);
+        print_r($authorId);
         // bind the parameters
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':content', $content);
