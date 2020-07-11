@@ -7,7 +7,7 @@ $postdata = file_get_contents("php://input");
 if (isset($postdata) && !empty($postdata)) {
     $request = json_decode($postdata);
 
-    try {
+    // try {
 
 // insert query
         $query = "INSERT INTO posts SET title=:title, content=:content, category=:category, authorId=:authorId";
@@ -33,9 +33,9 @@ if (isset($postdata) && !empty($postdata)) {
         } else {
             echo json_encode(array('result'=>'fail'));
         }
-    }
-    // show error
-    catch (PDOException $exception) {
-        die('ERROR: ' . $exception->getMessage());
-    }
+    // }
+    // // show error
+    // catch (PDOException $exception) {
+    //     die('ERROR: ' . $exception->getMessage());
+    // }
 }
